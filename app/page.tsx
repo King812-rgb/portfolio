@@ -56,7 +56,7 @@ const sections = [
           title="Portfolio"
           description="Highlight my skills and projects"
           techStack="React, Next.js, Tailwind, Vercel"
-          githubLink="https://github.com/yourgithub/portfolio"
+          githubLink="https://github.com/King812-rgb/portfolio"
         /></SwiperSlide>
       </Swiper>
     )
