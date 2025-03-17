@@ -16,7 +16,7 @@ const sections = [
       <>
         <h3>
           <span className="split-text is-visible">
-            Hi, I'm Masaki Nagura, a Systems Development Director passionate about building competitive businesses with software&AI.
+            Hi, I&rsquo;m Masaki Nagura, a Systems Development Director passionate about building competitive businesses with software&AI.
           </span>
         </h3>
         <br />
@@ -29,9 +29,9 @@ const sections = [
 
         <strong>Future Vision</strong>
         <br />
-        In the coming years, I’m committed to refining my skills in coding, design, and architecture as a backend enginineer, maximizing my impact.
+        In the coming years, I&rsquo;m committed to refining my skills in coding, design, and architecture as a backend enginineer, maximizing my impact.
         <br /><br />
-        If you're interested in working with me or have an offer, feel free to reach out!
+        If you&rsquo;re interested in working with me or have an offer, feel free to reach out!
         <br />
         <SocialLinks />
       </>
