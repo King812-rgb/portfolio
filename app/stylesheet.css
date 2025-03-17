@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+.swiper-button-prev, .swiper-button-next {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.swiper:hover .swiper-button-prev,
+.swiper:hover .swiper-button-next {
+  opacity: 1;
+  visibility: visible;
+}
