@@ -4,11 +4,9 @@ on:
   push:
     branches:
       - main
-      - dev
   pull_request:
     branches:
       - main
-      - dev
 
 jobs:
   lint-and-sonarqube:
@@ -42,6 +40,6 @@ jobs:
           sonar-scanner \
             -Dsonar.organization=your-org \
             -Dsonar.projectKey=your-project \
-            -Dsonar.sources=src \
+            -Dsonar.sources=app \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.token=$SONAR_TOKEN
