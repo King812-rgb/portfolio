@@ -6,7 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "npm run lint",
+      "npx sonarlint --exclude '**/.next/**' --exclude '**/node_modules/**' --exclude '**/dist/**' --exclude '**/public/**' --exclude '**/coverage/**' --quiet"
+    ]
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
@@ -17,6 +24,7 @@
     "framer-motion": "^12.5.0",
     "next": "15.2.2",
     "nodemailer": "^6.10.0",
+    "prettier": "^3.5.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "swiper": "^11.2.5"
@@ -29,8 +37,11 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "concurrently": "^9.1.2",
-    "eslint": "^9",
+    "eslint": "^9.22.0",
     "eslint-config-next": "15.2.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.0",
+    "sonarlint": "^1.1.0",
     "tailwindcss": "^4.0.14",
     "typescript": "^5"
   }

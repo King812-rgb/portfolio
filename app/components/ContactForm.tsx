@@ -11,7 +11,9 @@ export default function ContactForm() {
 
   const [status, setStatus] = useState(""); // 成功・エラーメッセージ用
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -43,11 +45,13 @@ export default function ContactForm() {
       onSubmit={handleSubmit}
       className="max-w-xl mx-auto bg-gray-900 p-6 rounded-lg shadow-md"
     >
-
       {/* Name */}
-      <label className="block text-gray-400">Name</label>
+      <label htmlFor="name" className="block text-gray-400">
+        Name
+      </label>
       <input
         type="text"
+        id="name"
         name="name"
         value={formData.name}
         onChange={handleChange}
@@ -56,9 +60,12 @@ export default function ContactForm() {
       />
 
       {/* Email */}
-      <label className="block text-gray-400 mt-4">Email</label>
+      <label htmlFor="email" className="block text-gray-400 mt-4">
+        Email
+      </label>
       <input
         type="email"
+        id="email"
         name="email"
         value={formData.email}
         onChange={handleChange}
@@ -67,9 +74,12 @@ export default function ContactForm() {
       />
 
       {/* Phone */}
-      <label className="block text-gray-400 mt-4">Phone</label>
+      <label htmlFor="phone" className="block text-gray-400 mt-4">
+        Phone
+      </label>
       <input
         type="tel"
+        id="phone"
         name="phone"
         value={formData.phone}
         onChange={handleChange}
@@ -78,8 +88,11 @@ export default function ContactForm() {
       />
 
       {/* Message */}
-      <label className="block text-gray-400 mt-4">Message</label>
+      <label htmlFor="message" className="block text-gray-400 mt-4">
+        Message
+      </label>
       <textarea
+        id="message"
         name="message"
         value={formData.message}
         onChange={handleChange}

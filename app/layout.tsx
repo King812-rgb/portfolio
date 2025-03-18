@@ -1,4 +1,4 @@
-import "./stylesheet.css";
+import "./global.css";
 
 export default function RootLayout({
   children,
@@ -7,14 +7,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <head>
-        <link rel="stylesheet" href="stylesheet.css" />
-      </head>
-      <body
-        className="antialiased"
-      >
-        {children}
-      </body>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }
