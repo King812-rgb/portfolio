@@ -8,11 +8,11 @@ export async function POST(req: NextRequest) {
 
     if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
       console.error(
-        "EMAIL_USER or EMAIL_PASS environment variables are not set."
+        "EMAIL_USER or EMAIL_PASS environment variables are not set.",
       );
       return NextResponse.json(
         { error: "Email configuration error" },
-        { status: 500 }
+        { status: 500 },
       );
     }
     console.log(process.env.EMAIL_USER);
@@ -38,13 +38,13 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(
       { message: "Email sent successfully" },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("Email sending error:", error);
     return NextResponse.json(
       { error: "Failed to send email" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
