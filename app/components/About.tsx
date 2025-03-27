@@ -11,24 +11,70 @@ export function About() {
         </span>
       </h3>
       <br />
-      <strong>Background</strong>
+      <strong>Work Experience</strong>
+      <ul className="list-disc list-inside">
+        <li>
+          Internship as a BizDev Maneger,{" "}
+          <a
+            href="https://miup.jp/"
+            className="text-blue-500 hover:text-blue-600"
+          >
+            Miup Inc,
+          </a>{" "}
+          Bangladesh (2019)
+        </li>
+        <li>
+          System Analyst and IT Systems Engineer,{" "}
+          <a
+            href="https://www.accenture.com/"
+            className="text-blue-500 hover:text-blue-600"
+          >
+            Accenture Japan Ltd,
+          </a>{" "}
+          Japan (2019-2022)
+        </li>
+        <li>
+          System Development Director and Project Manager,{" "}
+          <a
+            href="https://www.recruit.co.jp/"
+            className="text-blue-500 hover:text-blue-600"
+          >
+            Recruit Co.,
+          </a>{" "}
+          Japan (2022-Present)
+        </li>
+      </ul>
       <br />
-      Born and raised in Tokyo, I studied medical engineering, focusing on
-      biometric signal processing and machine learning.
+      <strong>Skills</strong>
+      <ul className="list-disc list-inside">
+        <li>Project Management</li>
+        <li>
+          System Development Direction
+          <ul className="list-disc list-inside pl-5">
+            <li>Requirement Definition</li>
+            <li>Architecture Design</li>
+            <li>Migration Planning</li>
+          </ul>
+        </li>
+        <li>Front-end Development (React, Next.js, Tailwind CSS, etc..)</li>
+        <li>Back-end Development (Jave(SpringBoot), Python(Flask))</li>
+        <li>Other Tools (Git, Linux, SQL, Docker, etc...)</li>
+      </ul>
       <br />
-      After graduation, I spent 5years at{" "}
-      <a href="https://www.accenture.com/">Accenture</a> and{" "}
-      <a href="https://recruit-holdings.com/">Recruit Co.</a> , leading projects
-      in Retail EC, B2B SaaS, and consumer apps. <br />
-      I specialize in co-creating product visions and translating them into
-      product development.
+      <strong>Language</strong>
+      <ul className="list-disc list-inside">
+        <li>Japanese</li>
+        <li>English</li>
+      </ul>
       <br />
+      <strong>Career Preference</strong>
       <br />
-      <strong>Future Vision</strong>
-      <br />
-      In the coming years, I&rsquo;m committed to refining my skills in coding,
-      design, and architecture as a backend enginineer, maximizing my impact.
-      <br />
+      <ul className="list-disc list-inside pl-5">
+        <li>
+          I&rsquo;m seeking opportunities, both in Japan and abroad, to challeng
+          myself and grow as a software engineer to enhance my impact.
+        </li>
+      </ul>
       <br />
       If you&rsquo;re interested in working with me or have an offer, feel free
       to reach out!
