@@ -43,7 +43,7 @@ export default function Home() {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="m-15"
+            className="mb-15 md:mx-20"
           >
             {section === "About" && <About />}
             {section === "Works" && <Works />}
