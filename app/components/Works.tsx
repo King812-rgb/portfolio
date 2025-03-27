@@ -23,7 +23,7 @@ export const Works = () => {
         <SwiperSlide>
           <WorkCard
             title="Portfolio"
-            description="Highlight my skills and projects"
+            description="Highlight my projects, skills, and experiences"
             siteLink="https://portfolio-masaki-naguras-projects.vercel.app/"
             githubLink="https://github.com/King812-rgb/portfolio"
             techStackList={[
