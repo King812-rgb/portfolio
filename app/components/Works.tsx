@@ -22,25 +22,24 @@ export const Works = () => {
       >
         <SwiperSlide>
           <WorkCard
-            title="Portfolio"
-            description="Highlight my projects, skills, and experiences"
-            siteLink="https://portfolio-masaki-naguras-projects.vercel.app/"
-            githubLink="https://github.com/King812-rgb/portfolio"
+            title="Portfolio-Admin (Still in development)"
+            description="Admin app for managing my portfolio. You can see design documents if click this card."
+            siteLink="https://wakeful-beak-b44.notion.site/Admin-PJ-1c4031c4b209804c8fbee3148668aa02"
+            githubLink="https://github.com/King812-rgb/PortfolioAdmin-BackEnd-"
             techStackList={[
-              "React",
               "Next.js",
               "Tailwind",
-              "Vercel",
-              "githubActions",
-              "sonarQube",
-              "Lint",
+              "Ruby on Rails",
+              "PostgreSQL",
+              "Docker",
+              "Amazon S3",
             ]}
           />
         </SwiperSlide>
         <SwiperSlide>
           <WorkCard
             title="Tech-Blog"
-            description="A blog about development issues and research"
+            description="A blog site about development issues and research. I’m adding new articles little by little."
             siteLink="https://tech-blog-five-lac.vercel.app/"
             githubLink="https://github.com/King812-rgb/tech-blog"
             techStackList={[
@@ -52,6 +51,23 @@ export const Works = () => {
               "sonarQube",
               "Lint",
               "Jest",
+            ]}
+          />
+        </SwiperSlide>
+        <SwiperSlide>
+          <WorkCard
+            title="Portfolio"
+            description="Highlight my projects, skills, and experiences. I’m trying to share from in progress here as much as possible."
+            siteLink="https://portfolio-masaki-naguras-projects.vercel.app/"
+            githubLink="https://github.com/King812-rgb/portfolio"
+            techStackList={[
+              "React",
+              "Next.js",
+              "Tailwind",
+              "Vercel",
+              "githubActions",
+              "sonarQube",
+              "Lint",
             ]}
           />
         </SwiperSlide>
