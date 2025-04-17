@@ -6,7 +6,9 @@ import { redirect } from "next/navigation";
 import { Work } from "@/app/types/Work";
 export default async function AdminEdit({
   params,
-}: Readonly<{ params: { work_id: string } }>) {
+}: {
+  params: { work_id: string };
+}) {
   const session = await getServerSession(authOptions);
   if (!session) {
     redirect("/admin?callbackUrl=/admin/edit/" + params.work_id);
