@@ -1,7 +1,7 @@
 import { Form } from "@/app/components/Admin/Form";
 import { getWorkListUtil } from "@/app/lib/getWorkListUtil";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { redirect } from "next/navigation";
 import { Work } from "@/app/types/Work";
 

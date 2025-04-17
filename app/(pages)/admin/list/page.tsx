@@ -2,7 +2,7 @@ import { WorkTableClient } from "@/app/components/Admin/WorkTable";
 import { getWorkListUtil } from "@/app/lib/getWorkListUtil";
 import Link from "next/link";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { redirect } from "next/navigation";
 export default async function AdminList() {
   const session = await getServerSession(authOptions);
