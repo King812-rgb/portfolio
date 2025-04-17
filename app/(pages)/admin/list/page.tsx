@@ -13,12 +13,14 @@ export default async function AdminList() {
 
   return (
     <div className="text-center flex flex-col items-center">
-    <h1 className="text-5xl font-bold mb-20">Work List</h1>
-    <Link href="/admin/create" className="mb-15 cursor-pointer p-3 w-70 bg-gray-900 text-white font-bold rounded-full">
+      <h1 className="text-5xl font-bold mb-20">Work List</h1>
+      <Link
+        href="/admin/create"
+        className="mb-15 cursor-pointer p-3 w-70 bg-gray-900 text-white font-bold rounded-full"
+      >
         +Create New Work
-    </Link>
-    <WorkTableClient works={works} />
-
+      </Link>
+      <WorkTableClient works={works} />
     </div>
   );
 }

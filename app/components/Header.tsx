@@ -26,7 +26,7 @@ export function Header() {
         setShowAdminLink(true);
         setTimeout(() => {
           setShowAdminLink(false);
-        }, 10000); 
+        }, 10000);
       }
     };
 
@@ -55,11 +55,14 @@ export function Header() {
 
       {/* Navigation Links */}
       <nav className="flex items-center justify-between space-x-3 md:space-x-6">
-      {showAdminLink && (
-        <button onClick={() => router.push("/admin")} className="cursor-pointer text-red-500 font-bold hover:text-gray-400 transition">
-          Admin
-        </button>
-      )}
+        {showAdminLink && (
+          <button
+            onClick={() => router.push("/admin")}
+            className="cursor-pointer text-red-500 font-bold hover:text-gray-400 transition"
+          >
+            Admin
+          </button>
+        )}
         {sections.map((section) => (
           <button
             key={section}

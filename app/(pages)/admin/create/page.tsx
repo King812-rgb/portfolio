@@ -8,5 +8,5 @@ export default async function AdminCreate() {
   if (!session) {
     redirect("/admin?callbackUrl=/admin/create");
   }
-  return <Form initialData={null} mode="create"/>;
+  return <Form initialData={null} mode="create" />;
 }

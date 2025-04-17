@@ -11,7 +11,6 @@ export function About() {
         </span>
       </h3>
       <br />
-      
       <strong>Work Experience</strong>
       <ul className="list-disc list-inside">
         <li>
@@ -46,7 +45,6 @@ export function About() {
         </li>
       </ul>
       <br />
-
       <strong>Skills</strong>
       <ul className="list-disc list-inside">
         <li>Project Management</li>

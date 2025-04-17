@@ -6,7 +6,10 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session?.user) {
-    return NextResponse.json({ status: "error", message: "Unauthorized" }, { status: 401 });
+    return NextResponse.json(
+      { status: "error", message: "Unauthorized" },
+      { status: 401 },
+    );
   }
   console.log("session:", session);
   try {
@@ -21,12 +24,12 @@ export async function POST(req: NextRequest) {
       console.error("Failed to update work");
       console.error(response.status);
       console.error(response.error.message);
-      return NextResponse.json({ status: "error"}, { status: 500 });
+      return NextResponse.json({ status: "error" }, { status: 500 });
     }
 
     return NextResponse.json({ status: "success" });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ status: "error"}, { status: 500 });
+    return NextResponse.json({ status: "error" }, { status: 500 });
   }
 }

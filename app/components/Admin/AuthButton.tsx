@@ -8,7 +8,7 @@ const AuthButton = () => {
   const callbackUrl = searchParams.get("callbackUrl") ?? "/admin/list";
   return (
     <button
-      onClick={() => signIn("google", {callbackUrl})}
+      onClick={() => signIn("google", { callbackUrl })}
       className="cursor-pointer p-3 w-80 bg-white text-black font-bold rounded-full"
     >
       Sign in with Google

@@ -20,7 +20,7 @@ export function WorkTableClient({ works }: Readonly<{ works: Work[] }>) {
 
     if (data.status !== "success") {
       alert("削除に失敗しました");
-    }else{
+    } else {
       alert("削除に成功しました");
       router.refresh();
     }
@@ -33,26 +33,32 @@ export function WorkTableClient({ works }: Readonly<{ works: Work[] }>) {
           <th className="p-2 w-3/7">Description</th>
           <th className="p-2 w-1/7">Edit</th>
           <th className="p-2 w-1/7">Delete</th>
-      </tr>
-    </thead>
-    <tbody className="divide-y divide-gray-700">
-      {works.map((work: Work) => (
-        <tr key={work.id}>
-          <td className="p-2 w-2/7 text-left">{work.title}</td>
-          <td className="p-2 w-3/7 text-left">{work.description}</td>
-          <td className="p-2 w-1/7 cursor-pointer">
-            <button onClick={() => router.push(`/admin/edit/${work.id}`)} className="cursor-pointer p-2 bg-gray-900 rounded-md mx-auto">
-              編集
-            </button>
-          </td>
-          <td className="p-2 w-1/7 cursor-pointer">
-            <button onClick={() => handleDelete(work.id)} className="cursor-pointer p-2 bg-red-500 rounded-md mx-auto">
-              削除
-            </button>
-          </td>
         </tr>
-      ))}
-    </tbody>
-  </table>
+      </thead>
+      <tbody className="divide-y divide-gray-700">
+        {works.map((work: Work) => (
+          <tr key={work.id}>
+            <td className="p-2 w-2/7 text-left">{work.title}</td>
+            <td className="p-2 w-3/7 text-left">{work.description}</td>
+            <td className="p-2 w-1/7 cursor-pointer">
+              <button
+                onClick={() => router.push(`/admin/edit/${work.id}`)}
+                className="cursor-pointer p-2 bg-gray-900 rounded-md mx-auto"
+              >
+                編集
+              </button>
+            </td>
+            <td className="p-2 w-1/7 cursor-pointer">
+              <button
+                onClick={() => handleDelete(work.id)}
+                className="cursor-pointer p-2 bg-red-500 rounded-md mx-auto"
+              >
+                削除
+              </button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }

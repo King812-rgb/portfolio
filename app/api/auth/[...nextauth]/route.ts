@@ -1,6 +1,6 @@
 import type { JWT } from "next-auth/jwt";
-import type {Session } from "next-auth";
-import type { Account, Profile, NextAuthOptions} from "next-auth";
+import type { Session } from "next-auth";
+import type { Account, Profile, NextAuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
 import { getUser } from "@/app/api/user/getUser";
@@ -25,32 +25,44 @@ export const authOptions: NextAuthOptions = {
     }: {
       token: JWT;
       account?: Account | null;
-      profile?: (Profile & { sub: string, name?: string | null, email?: string | null }) | null;
+      profile?:
+        | (Profile & {
+            sub: string;
+            name?: string | null;
+            email?: string | null;
+          })
+        | null;
     }): Promise<JWT | null> {
-        if (account && profile) {
-          if (process.env.ALLOWED_USER != profile.sub) {
-            console.log("Unauthorized user:", profile.name);
-            return null;
-          }
-          const userOnDB = await getUser(profile.sub);
-          if (!userOnDB) {
-            const created = await createUser({
-              user_id: String(profile.sub),
-              name: String(profile.name),
-              email: String(profile.email),
-              created_at: null,
-              updated_at: null
-            });
-            if (!created) throw new Error("Failed to create user");
-          }
-          token.user_id = profile.sub;
-          token.name = profile.name;
-          token.email = profile.email;
-          token.accessToken = account.access_token;
+      if (account && profile) {
+        if (process.env.ALLOWED_USER != profile.sub) {
+          console.log("Unauthorized user:", profile.name);
+          return null;
         }
+        const userOnDB = await getUser(profile.sub);
+        if (!userOnDB) {
+          const created = await createUser({
+            user_id: String(profile.sub),
+            name: String(profile.name),
+            email: String(profile.email),
+            created_at: null,
+            updated_at: null,
+          });
+          if (!created) throw new Error("Failed to create user");
+        }
+        token.user_id = profile.sub;
+        token.name = profile.name;
+        token.email = profile.email;
+        token.accessToken = account.access_token;
+      }
       return token;
     },
-    async session({ session, token }: { session: Session; token: JWT }): Promise<Session | null> {
+    async session({
+      session,
+      token,
+    }: {
+      session: Session;
+      token: JWT;
+    }): Promise<Session | null> {
       if (!token?.accessToken) {
         return null;
       }

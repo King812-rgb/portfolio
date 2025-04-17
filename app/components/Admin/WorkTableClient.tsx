@@ -21,7 +21,7 @@ export function WorkTableClient({ works }: { works: Work[] }) {
 
     if (data.status !== "success") {
       alert("削除に失敗しました");
-    }else{
+    } else {
       alert("削除に成功しました");
       router.refresh();
     }
@@ -33,25 +33,21 @@ export function WorkTableClient({ works }: { works: Work[] }) {
           <th>Title</th>
           <th>Edit</th>
           <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      {works.map((work: Work) => (
-        <tr key={work.id}>
-          <td>{work.title}</td>
-          <td>
-            <Link href={`/admin/edit/${work.id}`}>
-              編集
-            </Link>
-          </td>
-          <td>
-            <button onClick={() => handleDelete(work.id)}>
-              削除
-            </button>
-          </td>
         </tr>
-      ))}
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        {works.map((work: Work) => (
+          <tr key={work.id}>
+            <td>{work.title}</td>
+            <td>
+              <Link href={`/admin/edit/${work.id}`}>編集</Link>
+            </td>
+            <td>
+              <button onClick={() => handleDelete(work.id)}>削除</button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }
