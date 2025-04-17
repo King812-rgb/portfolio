@@ -1,10 +1,28 @@
+"use client";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import WorkCard from "./WorkCard";
 import "swiper/css";
 import "swiper/css/navigation";
+import { useEffect, useState } from "react";
+import { Work } from "@/app/types/Work";
 
 export const Works = () => {
+  const [works, setWorks] = useState<Work[]>([]);
+
+  useEffect(() => {
+    fetch("/api/works/getWorkList")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setWorks(data);
+      });
+  }, []);
+
+  if (!works.length) {
+    return <div className="text-center">Loading works...</div>;
+  }
+
   return (
     <>
       <h1 className="text-2xl font-bold mb-5">Works</h1>
@@ -20,57 +38,18 @@ export const Works = () => {
         }}
         className="max-w-5xl mx-auto"
       >
-        <SwiperSlide>
-          <WorkCard
-            title="(WIP) Portfolio-Admin"
-            description="Admin for managing my portfolio.(design doc only now)"
-            siteLink="https://wakeful-beak-b44.notion.site/Admin-PJ-1c4031c4b209804c8fbee3148668aa02"
-            githubLink="https://github.com/King812-rgb/PortfolioAdmin-BackEnd-"
-            techStackList={[
-              "Next.js",
-              "Tailwind",
-              "Ruby on Rails",
-              "PostgreSQL",
-              "Docker",
-              "Amazon S3",
-            ]}
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <WorkCard
-            title="Tech-Blog"
-            description="A blog site about development issues and research."
-            siteLink="https://tech-blog-five-lac.vercel.app/"
-            githubLink="https://github.com/King812-rgb/tech-blog"
-            techStackList={[
-              "React",
-              "Next.js",
-              "Tailwind",
-              "Vercel",
-              "githubActions",
-              "sonarQube",
-              "Lint",
-              "Jest",
-            ]}
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <WorkCard
-            title="Portfolio"
-            description="Highlight my projects, skills, and experiences."
-            siteLink="https://portfolio-masaki-naguras-projects.vercel.app/"
-            githubLink="https://github.com/King812-rgb/portfolio"
-            techStackList={[
-              "React",
-              "Next.js",
-              "Tailwind",
-              "Vercel",
-              "githubActions",
-              "sonarQube",
-              "Lint",
-            ]}
-          />
-        </SwiperSlide>
+        {works.map((work) => (
+          <SwiperSlide key={work.id}>
+            <WorkCard
+              title={work.title}
+              description={work.description}
+              siteLink={work.site_url}
+              githubLink={work.github_url}
+              techStackList={work.tech_stack.split(",")}
+              screenshotUrl={work.screenshot_url}
+            />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </>
   );

@@ -45,10 +45,10 @@ export function Contact() {
       <h1 className="text-2xl font-bold mb-5">Contact</h1>
       <form
         onSubmit={handleSubmit}
-        className="max-w-xl mx-auto bg-gray-900 p-6 rounded-lg shadow-md"
+        className="max-w-xl mx-auto bg-gray-900 p-6 rounded-lg shadow-md text-white"
       >
         {/* Name */}
-        <label htmlFor="name" className="block text-gray-400">
+        <label htmlFor="name" className="block">
           Name
         </label>
         <input
@@ -62,7 +62,7 @@ export function Contact() {
         />
 
         {/* Email */}
-        <label htmlFor="email" className="block text-gray-400 mt-4">
+        <label htmlFor="email" className="block mt-4">
           Email
         </label>
         <input
@@ -76,7 +76,7 @@ export function Contact() {
         />
 
         {/* Phone */}
-        <label htmlFor="phone" className="block text-gray-400 mt-4">
+        <label htmlFor="phone" className="block mt-4">
           Phone
         </label>
         <input
@@ -90,7 +90,7 @@ export function Contact() {
         />
 
         {/* Message */}
-        <label htmlFor="message" className="block text-gray-400 mt-4">
+        <label htmlFor="message" className="block mt-4">
           Message
         </label>
         <textarea
@@ -106,7 +106,7 @@ export function Contact() {
         {/* Submit Button */}
         <button
           type="submit"
-          className="cursor-pointer w-full mt-6 p-3 text-lg font-bold bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg shadow-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+          className="block cursor-pointer w-2/3 mx-auto mt-6 p-3 text-lg font-bold text-white rounded-lg shadow-lg bg-gray-800 text-center"
         >
           Send Message
         </button>

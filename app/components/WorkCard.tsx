@@ -9,6 +9,7 @@ interface WorkCardProps {
   githubLink: string;
   techStackList: string[];
   siteLink: string;
+  screenshotUrl: string;
 }
 
 const WorkCard: React.FC<WorkCardProps> = ({
@@ -17,6 +18,7 @@ const WorkCard: React.FC<WorkCardProps> = ({
   githubLink,
   techStackList,
   siteLink,
+  screenshotUrl,
 }) => {
   return (
     <a
@@ -26,7 +28,7 @@ const WorkCard: React.FC<WorkCardProps> = ({
     >
       <div className="flex flex-col bg-gray-800 rounded-lg hover:bg-gray-700 hover:border-2 hover:border-blue-500 transition">
         <Image
-          src={`/screenshots/${title}.png`}
+          src={`${screenshotUrl}`}
           alt={`${title} screenshot`}
           className="w-full h-64 object-cover rounded-t-lg"
           width={600}

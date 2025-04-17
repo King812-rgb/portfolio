@@ -1,4 +1,7 @@
+"use client";
 const sections = ["About", "Works", "Contact"];
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export function Header() {
   const headerHeight = 81;
@@ -14,6 +17,32 @@ export function Header() {
     }
   };
 
+  const [showAdminLink, setShowAdminLink] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.metaKey && e.key === "k") {
+        setShowAdminLink(true);
+        setTimeout(() => {
+          setShowAdminLink(false);
+        }, 10000); 
+      }
+    };
+
+    const handleClick = () => {
+      setShowAdminLink(false);
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("click", handleClick);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("click", handleClick);
+    };
+  }, []);
+
   return (
     <div className="fixed top-0 left-0 right-0 z-50 max-w-7xl mx-auto flex items-center justify-between bg-black p-6">
       {/* Title Link */}
@@ -26,6 +55,11 @@ export function Header() {
 
       {/* Navigation Links */}
       <nav className="flex items-center justify-between space-x-3 md:space-x-6">
+      {showAdminLink && (
+        <button onClick={() => router.push("/admin")} className="cursor-pointer text-red-500 font-bold hover:text-gray-400 transition">
+          Admin
+        </button>
+      )}
         {sections.map((section) => (
           <button
             key={section}
