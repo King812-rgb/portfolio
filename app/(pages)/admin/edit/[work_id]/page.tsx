@@ -6,13 +6,13 @@ import { redirect } from "next/navigation";
 import { Work } from "@/app/types/Work";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     work_id: string;
-  };
+  }>;
 }
 
 export default async function AdminEdit({ params }: PageProps) {
-  const { work_id } = params;
+  const { work_id } = await params;
   const session = await getServerSession(authOptions);
   if (!session) {
     redirect("/admin?callbackUrl=/admin/edit/" + work_id);
