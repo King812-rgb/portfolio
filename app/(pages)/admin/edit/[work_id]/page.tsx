@@ -5,13 +5,17 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { Work } from "@/app/types/Work";
 
-interface PageProps {
+interface AdminEditProps {
   params: {
     work_id: string;
   };
 }
 
-export default async function AdminEdit({ params }: PageProps) {
+export default function AdminEditWrapper({ params }: AdminEditProps) {
+  return <AdminEdit params={params} />;
+}
+
+async function AdminEdit({ params }: AdminEditProps) {
   const session = await getServerSession(authOptions);
   if (!session) {
     redirect("/admin?callbackUrl=/admin/edit/" + params.work_id);
