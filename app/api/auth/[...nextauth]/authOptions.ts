@@ -1,5 +1,4 @@
-// app/api/auth/[...nextauth]/authOptions.ts
-import type { NextAuthOptions } from "next-auth";
+import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { getUser } from "@/app/api/user/getUser";
 import { createUser } from "@/app/api/user/createUser";
@@ -33,9 +32,11 @@ export const authOptions: NextAuthOptions = {
           });
           if (!created) throw new Error("Failed to create user");
         }
-        token.user_id = profile.sub;
-        token.name = profile.name;
-        token.email = profile.email;
+        token.user = {
+          user_id: profile.sub,
+          name: profile.name,
+          email: profile.email,
+        };
         token.accessToken = account.access_token;
       }
       return token;
@@ -45,10 +46,10 @@ export const authOptions: NextAuthOptions = {
         return null;
       }
       session.accessToken = token.accessToken as string;
-      session.user = {
-        name: token.name as string,
-        email: token.email as string,
-        user_id: token.user_id as string,
+      session.user = token.user as {
+        user_id: string;
+        name: string;
+        email: string;
       };
       return session;
     },

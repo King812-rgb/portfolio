@@ -4,9 +4,10 @@ import Link from "next/link";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { redirect } from "next/navigation";
+import { Session } from "next-auth";
 export default async function AdminList() {
-  const session = await getServerSession(authOptions);
-  if (!session?.user?.user_id) {
+  const session = (await getServerSession(authOptions)) as Session;
+  if (!session?.user.user_id) {
     redirect("/admin?callbackUrl=/admin/list");
   }
   const works = await getWorkListUtil(session.user.user_id);

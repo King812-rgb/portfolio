@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { redirect } from "next/navigation";
 import { Work } from "@/app/types/Work";
-
+import { Session } from "next-auth";
 interface PageProps {
   params: Promise<{
     work_id: string;
@@ -13,8 +13,8 @@ interface PageProps {
 
 export default async function AdminEdit({ params }: PageProps) {
   const { work_id } = await params;
-  const session = await getServerSession(authOptions);
-  if (!session) {
+  const session = (await getServerSession(authOptions)) as Session;
+  if (!session?.user.user_id) {
     redirect("/admin?callbackUrl=/admin/edit/" + work_id);
   }
   const works = await getWorkListUtil(session?.user.user_id);
