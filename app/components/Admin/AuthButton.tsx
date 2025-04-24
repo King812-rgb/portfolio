@@ -1,5 +1,5 @@
 "use client";
-
+import { Suspense } from "react";
 import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 
@@ -16,4 +16,10 @@ const AuthButton = () => {
   );
 };
 
-export default AuthButton;
+const AuthButtonWrapper = () => (
+  <Suspense>
+    <AuthButton />
+  </Suspense>
+);
+
+export default AuthButtonWrapper;
