@@ -2,6 +2,11 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { getUser } from "@/app/api/user/getUser";
 import { createUser } from "@/app/api/user/createUser";
+interface GoogleProfile {
+  sub: string;
+  name: string;
+  email: string;
+}
 
 const config = {
   providers: [
@@ -10,14 +15,14 @@ const config = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
-  secret: process.env.NEXTAUTH_SECRET, // .env に NEXTAUTH_SECRET が設定されていることを確認
+  secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt" as const,
   },
   callbacks: {
     async jwt({ token, account, profile }) {
       if (account && profile) {
-        const googleProfile = profile as any;
+        const googleProfile = profile as GoogleProfile;
 
         if (process.env.ALLOWED_USER != googleProfile.sub) {
           console.log("Unauthorized user:", googleProfile.name);
