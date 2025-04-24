@@ -1,18 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { callApi } from "@/app/lib/callApi";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
-import { Session } from "next-auth";
+import { auth } from "@/app/auth";
 
 export async function POST(req: NextRequest) {
-  const session = (await getServerSession(authOptions)) as Session;
+  const session = await auth();
   if (!session?.user.user_id) {
     return NextResponse.json(
       { status: "error", message: "Unauthorized" },
       { status: 401 },
     );
   }
-  console.log("session:", session);
   try {
     const formData = await req.json();
     formData.user_id = session.user.user_id;

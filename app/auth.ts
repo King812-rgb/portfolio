@@ -1,41 +1,45 @@
-import type { NextAuthOptions } from "next-auth";
+import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { getUser } from "@/app/api/user/getUser";
 import { createUser } from "@/app/api/user/createUser";
 
-export const authOptions: NextAuthOptions = {
+const config = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET, // .env に NEXTAUTH_SECRET が設定されていることを確認
   session: {
     strategy: "jwt" as const,
   },
   callbacks: {
     async jwt({ token, account, profile }) {
       if (account && profile) {
-        if (process.env.ALLOWED_USER != profile.sub) {
-          console.log("Unauthorized user:", profile.name);
+        const googleProfile = profile as any;
+
+        if (process.env.ALLOWED_USER != googleProfile.sub) {
+          console.log("Unauthorized user:", googleProfile.name);
           return null;
         }
-        const userOnDB = await getUser(profile.sub);
+
+        const userOnDB = await getUser(googleProfile.sub as string);
         if (!userOnDB) {
           const created = await createUser({
-            user_id: String(profile.sub),
-            name: String(profile.name),
-            email: String(profile.email),
+            user_id: String(googleProfile.sub),
+            name: String(googleProfile.name),
+            email: String(googleProfile.email),
             created_at: null,
             updated_at: null,
           });
           if (!created) throw new Error("Failed to create user");
         }
+
         token.user = {
-          user_id: profile.sub,
-          name: profile.name,
-          email: profile.email,
+          user_id: googleProfile.sub,
+          name: googleProfile.name,
+          email: googleProfile.email,
         };
         token.accessToken = account.access_token;
       }
@@ -50,8 +54,12 @@ export const authOptions: NextAuthOptions = {
         user_id: string;
         name: string;
         email: string;
-      };
+      }; // トークンからユーザー情報をセッションにコピー
+
       return session;
     },
   },
 };
+
+// Auth.js のハンドラーとヘルパー関数（auth, signIn, signOut）をエクスポートします
+export const { handlers, auth, signIn, signOut } = NextAuth(config);

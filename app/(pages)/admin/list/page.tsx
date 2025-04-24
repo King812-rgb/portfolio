@@ -1,12 +1,11 @@
 import { WorkTableClient } from "@/app/components/Admin/WorkTable";
 import { getWorkListUtil } from "@/app/lib/getWorkListUtil";
 import Link from "next/link";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
+import { auth } from "@/app/auth";
 import { redirect } from "next/navigation";
-import { Session } from "next-auth";
+
 export default async function AdminList() {
-  const session = (await getServerSession(authOptions)) as Session;
+  const session = await auth();
   if (!session?.user.user_id) {
     redirect("/admin?callbackUrl=/admin/list");
   }

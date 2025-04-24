@@ -1,10 +1,9 @@
 import Link from "next/link";
 import LogoutButton from "./LogoutButton";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
-import { Session } from "next-auth";
+import { auth } from "@/app/auth";
+
 const Header = async () => {
-  const session = (await getServerSession(authOptions)) as Session;
+  const session = await auth();
   return (
     <div className="fixed top-0 left-0 right-0 z-50 max-w-7xl mx-auto flex items-center justify-between bg-black p-6">
       <Link
