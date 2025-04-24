@@ -2,6 +2,9 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { getUser } from "@/app/api/user/getUser";
 import { createUser } from "@/app/api/user/createUser";
+import type { Account, Profile, Session } from "@auth/core/types";
+import type { JWT } from "next-auth/jwt";
+
 interface GoogleProfile {
   sub: string;
   name: string;
@@ -20,7 +23,15 @@ const config = {
     strategy: "jwt" as const,
   },
   callbacks: {
-    async jwt({ token, account, profile }) {
+    async jwt({
+      token,
+      account,
+      profile,
+    }: {
+      token: JWT;
+      account: Account;
+      profile: Profile;
+    }) {
       if (account && profile) {
         const googleProfile = profile as GoogleProfile;
 
@@ -29,7 +40,7 @@ const config = {
           return null;
         }
 
-        const userOnDB = await getUser(googleProfile.sub as string);
+        const userOnDB = await getUser(googleProfile.sub);
         if (!userOnDB) {
           const created = await createUser({
             user_id: String(googleProfile.sub),
@@ -50,21 +61,20 @@ const config = {
       }
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token }: { session: Session; token: JWT }) {
       if (!token?.accessToken) {
         return null;
       }
-      session.accessToken = token.accessToken as string;
+      session.accessToken = token.accessToken;
       session.user = token.user as {
         user_id: string;
         name: string;
         email: string;
-      }; // トークンからユーザー情報をセッションにコピー
+      };
 
       return session;
     },
   },
 };
 
-// Auth.js のハンドラーとヘルパー関数（auth, signIn, signOut）をエクスポートします
 export const { handlers, auth, signIn, signOut } = NextAuth(config);
