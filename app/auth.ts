@@ -22,23 +22,29 @@ const config = {
   session: {
     strategy: "jwt" as const,
   },
+  pages: {
+    error: "admin/auth/error",
+  },
   callbacks: {
+    async signIn({ profile }: { profile?: Profile }) {
+      const googleProfile = profile as GoogleProfile | undefined;
+      if (!profile || process.env.ALLOWED_USER !== googleProfile?.sub) {
+        console.log("Unauthorized user:", googleProfile?.name);
+        return "/admin/auth/error";
+      }
+      return true;
+    },
     async jwt({
       token,
       account,
       profile,
     }: {
       token: JWT;
-      account: Account;
-      profile: Profile;
-    }) {
+      account?: Account | null;
+      profile?: Profile | null;
+    }): Promise<JWT | null> {
       if (account && profile) {
         const googleProfile = profile as GoogleProfile;
-
-        if (process.env.ALLOWED_USER != googleProfile.sub) {
-          console.log("Unauthorized user:", googleProfile.name);
-          return null;
-        }
 
         const userOnDB = await getUser(googleProfile.sub);
         if (!userOnDB) {
@@ -61,9 +67,19 @@ const config = {
       }
       return token;
     },
-    async session({ session, token }: { session: Session; token: JWT }) {
+    async session({
+      session,
+      token,
+    }: {
+      session: Session;
+      token: JWT;
+    }): Promise<Session> {
       if (!token?.accessToken) {
-        return null;
+        return {
+          ...session,
+          user: { name: "", email: "", user_id: "" },
+          accessToken: "",
+        };
       }
       session.accessToken = token.accessToken;
       session.user = token.user as {
